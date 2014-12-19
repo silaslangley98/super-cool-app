@@ -1,0 +1,13 @@
+<div>
+	<div class = "featureSection">
+		<p>Twitter Feature goes here</p>
+	</div>
+	<div class = "commentSection">
+		<div>
+			<ul ng-repeat="comment in comments | filter : {feature: 'twitter'} : true">
+				<li ng-bind = "comment"></li>
+			</ul>
+		</div>
+		<comments-here></comments-here>
+	</div>
+</div>

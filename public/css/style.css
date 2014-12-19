@@ -1,0 +1,50 @@
+body, header, nav, h1, h2 {
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #0A4273;
+	color: #fff;
+	padding: 5px 10px 5px;
+	margin-top: 0;
+	border-radius: 5px;
+}
+nav {
+	width: 20%;
+	float: left;
+	padding: 20px;
+}
+
+nav ul li {
+	padding: 20px 0;
+}
+
+nav a:hover {
+	background-color: #0A4273 !important;
+	border-radius: 6px;
+}
+
+nav a:focus {
+	background-color: #0A4273 !important;
+}
+
+
+#view {
+	float: right;
+	background-color: #eee;
+	height: 1000px;
+	width: 80%;
+}
+
+.featureSection {
+	height: 100px;
+	width: 90%;
+	background-color: #eee;
+}
+
+.commentSection {
+	height: 400px;
+	width: 90%;
+	background-color: #abcabc;
+}

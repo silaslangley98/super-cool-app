@@ -11,6 +11,8 @@ var logger			= require('morgan');
 var bcrypt			= require('bcrypt-nodejs');
 var uriUtil      	= require('mongodb-uri');
 var http         	= require('http');
+var passport     = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var app 			= express();
 
@@ -30,6 +32,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(passport.initialize());                               
+app.use(passport.session());
+app.use(function(req, res, next) {
+    if (req.user) {
+        res.cookie('user', JSON.stringify(req.user));
+    }
+    next();
+});
+
 
 // ROUTES
 

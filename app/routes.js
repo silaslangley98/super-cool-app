@@ -21,7 +21,40 @@ module.exports = function(app) {
 
 				res.send(users);
 			});
-		});
+		})
+
+		.post(function(req, res) {
+
+            mongoose.model('Users').create(req.body, function(err, product) {
+
+                if(err) res.send(err);
+
+                res.send(product);
+            });
+
+        });
+
+    router.route('/Users/:id')
+        .get(function(req, res) {
+            // use mongoose to get a product in the database by id
+            mongoose.model('Users').findOne({id: req.params.id}, function(err, product) {
+                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                if (err)
+                    res.send(err);
+
+                res.send(product); // return the product in JSON format
+            });
+        })
+
+        .post(function(req, res) {
+
+            mongoose.model('Users').findByIdAndUpdate(req.params.id, req.body, function(err, product) {
+                if(err) res.send(err);
+
+                res.send(product);
+            });
+        });
+
 
 	router.route('/comments')
 
@@ -34,7 +67,41 @@ module.exports = function(app) {
 
 				res.send(comments);
 			});
-		});
+		})
+
+		.post(function(req, res) {
+
+            mongoose.model('Comments').create(req.body, function(err, product) {
+
+                if(err) res.send(err);
+
+                res.send(product);
+            });
+
+        });
+
+	
+	router.route('/Comments/:id')
+        .get(function(req, res) {
+            // use mongoose to get a product in the database by id
+            mongoose.model('Comments').findOne({id: req.params.id}, function(err, product) {
+                // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+                if (err)
+                    res.send(err);
+
+                res.send(product); // return the product in JSON format
+            });
+        })
+
+        .post(function(req, res) {
+
+            mongoose.model('Comments').findByIdAndUpdate(req.params.id, req.body, function(err, product) {
+                if(err) res.send(err);
+
+                res.send(product);
+            });
+        });
+               
 
 	router.route('/features')
 
@@ -48,6 +115,22 @@ module.exports = function(app) {
 				res.send(features);
 			});
 		});
+
+    // logout API route
+    router.route('/logout')
+        .get(function(req, res, next) {
+            req.logout();
+            res.send(200);
+        });
+
+    // login API route
+    router.route('/login')
+        .post(passport.authenticate('local'), function(req, res) {
+            if (req.isAuthenticated()) {
+                res.cookie('user', JSON.stringify(req.user));
+                res.send(req.user);
+            }
+        });
 
 	// FRONT END ROUTES
 

@@ -10,7 +10,7 @@ var userSchema = new mongoose.Schema({
     	twitter: Boolean,
     	comments: Boolean,
     	weather: Boolean,
-    	photo: Boolean
+    	profile: Boolean
     }
 });
 
